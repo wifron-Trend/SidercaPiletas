@@ -23,12 +23,10 @@ namespace WebApi.Controllers
 
         // GET: api/Email
         [HttpGet]
-        public IEnumerable<Email> GetEmails()
+        public async Task<ActionResult<IEnumerable<Email>>> GetEmails()
         {
-            return _context.Emails;
+            return await _context.Email.ToListAsync();
         }
-
-     
 
         // PUT: api/Email/5
         [HttpPut("{id}")]
@@ -74,7 +72,7 @@ namespace WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.Emails.Add(email);
+            _context.Email.Add(email);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetEmail", new { id = email.idEmail }, email);
@@ -89,13 +87,13 @@ namespace WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var email = await _context.Emails.FindAsync(id);
+            var email = await _context.Email.FindAsync(id);
             if (email == null)
             {
                 return NotFound();
             }
 
-            _context.Emails.Remove(email);
+            _context.Email.Remove(email);
             await _context.SaveChangesAsync();
 
             return Ok(email);
@@ -103,7 +101,7 @@ namespace WebApi.Controllers
 
         private bool EmailExists(int id)
         {
-            return _context.Emails.Any(e => e.idEmail == id);
+            return _context.Email.Any(e => e.idEmail == id);
         }
     }
 }

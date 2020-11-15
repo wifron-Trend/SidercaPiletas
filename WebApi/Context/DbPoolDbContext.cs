@@ -11,8 +11,14 @@ namespace WebApi.Context
     {
         public DbPoolDbContext(DbContextOptions<DbPoolDbContext>options):base(options)
         {
-
         }
-        public DbSet<Email>Emails{ get; set; }
+
+        public DbSet<Email> Email{ get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //Configure default schema
+            modelBuilder.HasDefaultSchema("Pool");
+        }
     }
 }
