@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "PoolWebFrontend"
+    }
+  },
+  "defaultProject": "PoolWebFrontend",
+  "cli": {
+    "analytics": false
+  }
 }
